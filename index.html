@@ -34,6 +34,7 @@
         <select id="effectSelect">
           <option>Sepia</option>
           <option>Grayscale</option>
+          <option>Invert</option>
           <option>Black & White (50% Threshold)</option>
           <option>Black & White (OTSU)</option>
         </select>
@@ -52,11 +53,13 @@
       let grayscaleFilter;
       let sepiaFilter;
       let blackwhiteFilter;
+      let invertFilter;
 
       window.onload = function (){
         grayscaleFilter = new GrayscaleFilter(cvs);
         sepiaFilter = new SepiaFilter(cvs);
         blackwhiteFilter = new BlackwhiteFilter(cvs);
+        invertFilter = new InvertFilter(cvs);
       }
 
       document.getElementById("loadFileButton").addEventListener("click",function(){
@@ -71,6 +74,8 @@
         }else if (effectIndex === 1){
           grayscaleFilter.process(img);
         }else if (effectIndex === 2){
+          invertFilter.process(img);
+        }else if (effectIndex === 3){
           blackwhiteFilter.setThreshold(127);
           blackwhiteFilter.setOTSUEnabled(false);
           let threshold = blackwhiteFilter.process(img);
