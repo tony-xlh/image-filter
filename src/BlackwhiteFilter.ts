@@ -1,14 +1,55 @@
 import { GenericImageFilter } from "./GenericImageFilter";
+// @ts-ignore
+import otsu from 'otsu';
 
 export class BlackwhiteFilter extends GenericImageFilter {
   threshold:number = 127;
-  convert(r: number, g: number, b: number, a: number): { r: number; g: number; b: number; a: number; } {
-    const gray = this.grayscale(r,g,b);
-    let value = 255;
-    if (gray < this.threshold) {
-      value = 0;
+  otsuEnabled:boolean = false;
+  constructor(cvs:HTMLCanvasElement,threshold:number,otsuEnabled:boolean){
+    super(cvs);
+    this.threshold = threshold;
+    this.otsuEnabled = otsuEnabled;
+  }
+
+  process(img:HTMLImageElement):number{
+    const width = img.naturalWidth;
+    const height = img.naturalHeight;
+    const context = this.cvs.getContext('2d');
+    this.cvs.width = width;
+    this.cvs.height = height;
+    let threshold;
+    if (context) {
+      context.drawImage(img, 0, 0);
+      const imageData = context.getImageData(0, 0, this.cvs.width, this.cvs.height);
+      const pixels = imageData.data; //[r,g,b,a,...]
+      const grayscaleValues = [];
+      for (var i = 0; i < pixels.length; i += 4) {
+        const red = pixels[i];
+        const green = pixels[i + 1];
+        const blue = pixels[i + 2];
+        const grayscale = this.grayscale(red, green, blue);
+        grayscaleValues.push(grayscale);
+      }
+      if (this.otsuEnabled) {
+        threshold = otsu(grayscaleValues);
+      }else{
+        threshold = this.threshold;
+      }
+      let grayscaleIndex = 0;
+      for (var i = 0; i < pixels.length; i += 4) {
+        const gray = grayscaleValues[grayscaleIndex];
+        grayscaleIndex = grayscaleIndex + 1;
+        let value = 255;
+        if (gray < threshold) {
+          value = 0;
+        }
+        pixels[i] = value;
+        pixels[i + 1] = value;
+        pixels[i + 2] = value;
+      }
+      context.putImageData(imageData, 0, 0);
     }
-    return {r:value,g:value,b:value,a:a};
+    return threshold;
   }
 
   grayscale(r: number, g: number, b: number): number {
@@ -17,5 +58,9 @@ export class BlackwhiteFilter extends GenericImageFilter {
 
   setThreshold(threshold:number){
     this.threshold = threshold;
+  }
+
+  setOTSUEnabled(enabled:boolean){
+    this.otsuEnabled = enabled;
   }
 }

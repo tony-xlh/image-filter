@@ -35,6 +35,7 @@
           <option>Sepia</option>
           <option>Grayscale</option>
           <option>Black & White (50% Threshold)</option>
+          <option>Black & White (OTSU)</option>
         </select>
       </label>
       <button id="convertButton">Convert</button>
@@ -69,8 +70,15 @@
           sepiaFilter.process(img);
         }else if (effectIndex === 1){
           grayscaleFilter.process(img);
+        }else if (effectIndex === 2){
+          blackwhiteFilter.setThreshold(127);
+          blackwhiteFilter.setOTSUEnabled(false);
+          let threshold = blackwhiteFilter.process(img);
+          console.log("Threshold: "+threshold);
         }else{
-          blackwhiteFilter.process(img);
+          blackwhiteFilter.setOTSUEnabled(true);
+          let threshold = blackwhiteFilter.process(img);
+          console.log("Threshold: "+threshold);
         }
         document.getElementById("image").src = cvs.toDataURL();
       })
