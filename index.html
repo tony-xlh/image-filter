@@ -78,8 +78,9 @@
         Dynamsoft.DDV.Core.engineResourcePath = "/dynamsoft-document-viewer@1.1.0/dist/engine";// Lead to a folder containing the distributed WASM files
         await Dynamsoft.DDV.Core.loadWasm();
         await Dynamsoft.DDV.Core.init(); 
+        let filterHandler = new ImageFilterHandler();
         // Configure image filter feature
-        Dynamsoft.DDV.setProcessingHandler("imageFilter", new Dynamsoft.DDV.ImageFilter());
+        Dynamsoft.DDV.setProcessingHandler("imageFilter", filterHandler);
         // Create an edit viewer
         const editViewer = new Dynamsoft.DDV.EditViewer({
             container: "container",

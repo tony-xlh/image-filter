@@ -16,13 +16,17 @@ export class ImageFilterHandler extends DDV.ImageFilter  {
     });
   };
   get defaultFilterType() {
-    return "BW"
+    return "original"
   };
   querySupported() {
     return [
       {
+        type: "original",
+        label: "Original"
+      },
+      {
         type: "BW",
-        label: "Black & White"
+        label: "B & W"
       },
       {
         type: "sepia",
