@@ -1,5 +1,5 @@
 export interface ImageFilter {
   cvs:HTMLCanvasElement;
-  process(img:HTMLImageElement): void;
+  process(img:HTMLImageElement|HTMLCanvasElement): void;
   convert(r:number,g:number,b:number,a:number): {r:number,g:number,b:number,a:number};
 }
