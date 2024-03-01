@@ -11,15 +11,18 @@ export class BlackwhiteFilter extends GenericImageFilter {
     this.otsuEnabled = otsuEnabled;
   }
 
-  process(img:HTMLImageElement|HTMLCanvasElement):number{
+  process(img:HTMLImageElement|HTMLCanvasElement|HTMLVideoElement):number{
     let width;
     let height;
     if (img instanceof HTMLImageElement) {
       width = img.naturalWidth;
       height = img.naturalHeight;
-    }else{
+    }else if(img instanceof HTMLCanvasElement){
       width = img.width;
       height = img.height;
+    }else{
+      width = img.videoWidth;
+      height = img.videoHeight;
     }
     const context = this.cvs.getContext('2d');
     this.cvs.width = width;

@@ -6,15 +6,18 @@ export class GenericImageFilter implements ImageFilter {
     this.cvs = cvs;
   }
 
-  process(img:HTMLImageElement|HTMLCanvasElement){
+  process(img:HTMLImageElement|HTMLCanvasElement|HTMLVideoElement){
     let width;
     let height;
     if (img instanceof HTMLImageElement) {
       width = img.naturalWidth;
       height = img.naturalHeight;
-    }else{
+    }else if (img instanceof HTMLCanvasElement){
       width = img.width;
       height = img.height;
+    }else{
+      width = img.videoWidth;
+      height = img.videoHeight;
     }
     const context = this.cvs.getContext('2d');
     this.cvs.width = width;
