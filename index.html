@@ -22,6 +22,7 @@
         display: none;
       }
     </style>
+    <script type="module" src="/src/main.ts"></script>
   </head>
   <body>
     <div class="home">
@@ -33,7 +34,7 @@
         <select id="effectSelect">
           <option>Sepia</option>
           <option>Grayscale</option>
-          <option>Black & White</option>
+          <option>Black & White (50% Threshold)</option>
         </select>
       </label>
       <button id="convertButton">Convert</button>
@@ -44,13 +45,34 @@
       </div>
       <canvas id="canvasHidden"></canvas>
     </div>
+    
     <script>
+      let cvs = document.getElementById("canvasHidden");
+      let grayscaleFilter;
+      let sepiaFilter;
+      let blackwhiteFilter;
+
+      window.onload = function (){
+        grayscaleFilter = new GrayscaleFilter(cvs);
+        sepiaFilter = new SepiaFilter(cvs);
+        blackwhiteFilter = new BlackwhiteFilter(cvs);
+      }
+
       document.getElementById("loadFileButton").addEventListener("click",function(){
         document.getElementById("file").click();
       })
 
       document.getElementById("convertButton").addEventListener("click",function(){
-        
+        const img = document.getElementById("imageHidden");
+        let effectIndex = document.getElementById("effectSelect").selectedIndex;
+        if (effectIndex === 0) {
+          sepiaFilter.process(img);
+        }else if (effectIndex === 1){
+          grayscaleFilter.process(img);
+        }else{
+          blackwhiteFilter.process(img);
+        }
+        document.getElementById("image").src = cvs.toDataURL();
       })
 
       document.getElementById("downloadButton").addEventListener("click",async function(){
