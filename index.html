@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="/dynamsoft-document-viewer@1.1.0/dist/ddv.js"></script>
-    <link rel="stylesheet" href="/dynamsoft-document-viewer@1.1.0/dist/ddv.css">
+    <script src="https://cdn.jsdelivr.net/npm/dynamsoft-document-viewer@1.1.0/dist/ddv.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dynamsoft-document-viewer@1.1.0/dist/ddv.css">
     <title>Image Filter</title>
     <style>
       .imageContainer {
@@ -30,7 +30,14 @@
         height: 450px;
     }
     </style>
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module">
+      import { ImageFilterHandler, BlackwhiteFilter, InvertFilter, GrayscaleFilter, SepiaFilter } from 'https://cdn.jsdelivr.net/npm/image-filter-js/dist/image-filter.js';
+      window["GrayscaleFilter"] = GrayscaleFilter;
+      window["SepiaFilter"] = SepiaFilter;
+      window["InvertFilter"] = InvertFilter;
+      window["BlackwhiteFilter"] = BlackwhiteFilter;
+      window["ImageFilterHandler"] = ImageFilterHandler;
+    </script>
   </head>
   <body>
     <div class="home">
@@ -74,8 +81,8 @@
       }
 
       async function initDDV(){
-        Dynamsoft.DDV.Core.license = "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9"; // Public trial license which is valid for 24 hours
-        Dynamsoft.DDV.Core.engineResourcePath = "/dynamsoft-document-viewer@1.1.0/dist/engine";// Lead to a folder containing the distributed WASM files
+        Dynamsoft.DDV.Core.license = "DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ=="; // Public trial license which is valid for 24 hours
+        Dynamsoft.DDV.Core.engineResourcePath = "https://cdn.jsdelivr.net/npm/dynamsoft-document-viewer@1.1.0/dist/engine";// Lead to a folder containing the distributed WASM files
         await Dynamsoft.DDV.Core.loadWasm();
         await Dynamsoft.DDV.Core.init(); 
         let filterHandler = new ImageFilterHandler();
