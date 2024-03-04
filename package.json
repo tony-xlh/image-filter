@@ -1,16 +1,37 @@
 {
   "name": "image-filter",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "0.1.0",
   "type": "module",
+  "main": "./dist/image-filter.umd.cjs",
+  "module": "./dist/image-filter.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/image-filter.js"
+    },
+    "require": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/image-filter.umd.cjs"
+    }
+  },
+  "files": [
+    "dist/*.css",
+    "dist/*.js",
+    "dist/*.cjs",
+    "dist/*.d.ts"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/node": "^20.11.24",
     "typescript": "^5.2.2",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "vite-plugin-dts": "^3.7.3"
   },
   "dependencies": {
     "otsu": "^0.0.5"
