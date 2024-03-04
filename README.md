@@ -1,2 +1,6 @@
 # image-filter
-A JavaScript library to perform image filtering.
+
+A JavaScript library to apply image filtering effects.
+
+
+
