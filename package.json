@@ -1,7 +1,7 @@
 {
-  "name": "image-filter",
+  "name": "image-filter-js",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "main": "./dist/image-filter.umd.cjs",
   "module": "./dist/image-filter.js",
@@ -27,6 +27,26 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": "https://github.com/tony-xlh/image-filter",
+  "author": "xulihang <xulihanghai@gmail.com> (https://github.com/xulihang)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tony-xlh/image-filter/issues"
+  },
+  "homepage": "https://github.com/tony-xlh/image-filter#readme",
+  "keywords": [
+    "document",
+    "scanning",
+    "correction",
+    "enhance",
+    "image",
+    "filter",
+    "retouch",
+    "dynamsoft"
+  ],
   "devDependencies": {
     "@types/node": "^20.11.24",
     "typescript": "^5.2.2",

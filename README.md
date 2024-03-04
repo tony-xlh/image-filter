@@ -9,14 +9,14 @@ A JavaScript library to apply image filtering effects. It can be used to enhance
 Via NPM:
 
 ```bash
-npm install image-filter
+npm install image-filter-js
 ```
 
 Via CDN:
 
 ```html
 <script type="module">
-  import { ImageFilterHandler, BlackwhiteFilter, InvertFilter, GrayscaleFilter, SepiaFilter } from 'https://cdn.jsdelivr.net/npm/image-filter/dist/image-filter.js';
+  import { ImageFilterHandler, BlackwhiteFilter, InvertFilter, GrayscaleFilter, SepiaFilter } from 'https://cdn.jsdelivr.net/npm/image-filter-js/dist/image-filter.js';
 </script>
 ```
 
@@ -25,7 +25,7 @@ Via CDN:
 Process an image with the desired effect and save the data onto a Canvas.
 
 ```js
-import { ImageFilterHandler, BlackwhiteFilter, InvertFilter, GrayscaleFilter, SepiaFilter } from 'image-filter';
+import { ImageFilterHandler, BlackwhiteFilter, InvertFilter, GrayscaleFilter, SepiaFilter } from 'image-filter-js';
 let cvs = document.createElement("canvas");
 let grayscaleFilter = new GrayscaleFilter(cvs);
 grayscaleFilter.process(img);
