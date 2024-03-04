@@ -71,6 +71,7 @@
       let sepiaFilter;
       let blackwhiteFilter;
       let invertFilter;
+      let editViewer;
 
       window.onload = function (){
         grayscaleFilter = new GrayscaleFilter(cvs);
@@ -89,8 +90,8 @@
         // Configure image filter feature
         Dynamsoft.DDV.setProcessingHandler("imageFilter", filterHandler);
         // Create an edit viewer
-        const editViewer = new Dynamsoft.DDV.EditViewer({
-            container: "container",
+        editViewer = new Dynamsoft.DDV.EditViewer({
+          container: "container",
         });
       }
 
@@ -99,6 +100,10 @@
       })
 
       document.getElementById("toggleButton").addEventListener("click",function(){
+        if (!editViewer) {
+          alert("Dynamsoft Document Viewer is still loading.");
+          return;
+        }
         let container = document.getElementById("container");
         if (container.style.display === "none" || container.style.display === "") {
           container.style.display = "block";
