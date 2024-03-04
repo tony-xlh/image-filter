@@ -1,3 +1,4 @@
+import { InvertFilter } from ".";
 import { BlackwhiteFilter } from "./BlackwhiteFilter";
 import { GrayscaleFilter } from "./GrayscaleFilter";
 import { SepiaFilter } from "./SepiaFilter";
@@ -54,6 +55,9 @@ export class ImageFilterHandler extends DDV.ImageFilter  {
       }else if (type === "grayscale") {
         let grayscaleFilter = new GrayscaleFilter(canvas);
         grayscaleFilter.process(img);
+      }else if (type === "invert") {
+        let invertFilter = new InvertFilter(canvas);
+        invertFilter.process(img);
       }
       let blob = await canvasToBlob();
       return new Promise((r, _j) => {
@@ -77,6 +81,10 @@ export class ImageFilterHandler extends DDV.ImageFilter  {
       {
         type: "BW",
         label: "B&W"
+      },
+      {
+        type: "invert",
+        label: "Invert"
       },
       {
         type: "sepia",
