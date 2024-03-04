@@ -25,7 +25,7 @@ Via CDN:
 Process an image with the desired effect and save the data onto a Canvas.
 
 ```js
-import { ImageFilterHandler, BlackwhiteFilter, InvertFilter, GrayscaleFilter, SepiaFilter } from 'image-filter';
+import { ImageFilterHandler, BlackwhiteFilter, InvertFilter, GrayscaleFilter, SepiaFilter } from 'image-filter-js';
 let cvs = document.createElement("canvas");
 let grayscaleFilter = new GrayscaleFilter(cvs);
 grayscaleFilter.process(img);
