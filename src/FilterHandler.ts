@@ -37,9 +37,13 @@ const imageFromBlob = async (blob:Blob):Promise<HTMLImageElement> => {
   })
 }
 
+if (!DDV) {
+  class ImageFilter {}
+  DDV = {ImageFilter:ImageFilter};
+}
+
 export class ImageFilterHandler extends DDV.ImageFilter  {
   async applyFilter(image:any, type:string) {
-    console.log(image)
     if (type === "original") {
       return new Promise((r, _j) => {
         r(image.data)
