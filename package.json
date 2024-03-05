@@ -1,7 +1,7 @@
 {
   "name": "image-filter-js",
   "private": false,
-  "version": "0.1.3",
+  "version": "0.1.5",
   "type": "module",
   "main": "./dist/image-filter.umd.cjs",
   "module": "./dist/image-filter.js",
