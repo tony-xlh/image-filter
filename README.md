@@ -2,7 +2,10 @@
 
 A JavaScript library to apply image filtering effects. It can be used to enhance scanned documents images or photos.
 
-[Online demo](https://tony-xlh.github.io/image-filter)
+Online demos:
+
+1. [Basic](https://tony-xlh.github.io/image-filter)
+2. [Integration with Dynamsoft Document Viewer](https://tony-xlh.github.io/image-filter/document-viewer.html)
 
 ## Install
 
