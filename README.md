@@ -1,5 +1,9 @@
 # image-filter
 
+![version](https://img.shields.io/npm/v/image-filter-js.svg)
+![downloads](https://img.shields.io/npm/dm/image-filter-js.svg)
+![jsdelivr](https://img.shields.io/jsdelivr/npm/hm/image-filter-js.svg)
+
 A JavaScript library to apply image filtering effects. It can be used to enhance scanned documents images or photos.
 
 Online demos:
