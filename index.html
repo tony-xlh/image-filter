@@ -45,6 +45,7 @@
           <option>Invert</option>
           <option>Black & White (50% Threshold)</option>
           <option>Black & White (OTSU)</option>
+          <option>Black & White (Adaptive)</option>
         </select>
       </label>
       <button id="convertButton">Convert</button>
@@ -119,10 +120,13 @@
           blackwhiteFilter.setOTSUEnabled(false);
           let threshold = blackwhiteFilter.process(img);
           console.log("Threshold: "+threshold);
-        }else{
+        }else if (effectIndex === 4){
           blackwhiteFilter.setOTSUEnabled(true);
           let threshold = blackwhiteFilter.process(img);
           console.log("Threshold: "+threshold);
+        }else if (effectIndex === 5){
+          blackwhiteFilter.setAdaptive(true,31,10);
+          blackwhiteFilter.process(img);
         }
         document.getElementById("image").src = cvs.toDataURL();
       })
