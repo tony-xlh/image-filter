@@ -74,7 +74,7 @@ export class GaussianBlurFilter extends GenericImageFilter {
     return kernel;
   }
 
-  applyKernel(data:Uint8ClampedArray<ArrayBufferLike>, kernel:number[], x:number, y:number, width:number, height:number, horizontal: boolean) {
+  applyKernel(data:Uint8ClampedArray, kernel:number[], x:number, y:number, width:number, height:number, horizontal: boolean) {
     let r = 0, g = 0, b = 0, a = 0;
     const radius = (kernel.length - 1) / 2;
 

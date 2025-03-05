@@ -46,7 +46,7 @@ There are five filters:
 4. Invert
 5. Gaussian Blur
 
-The `BlackwhiteFilter`'s constructor takes four extra arguments.
+The `BlackwhiteFilter`'s constructor takes several extra arguments.
 
 * threshold: the global threshold
 * enableOTSU: whether to use OTSU to decide the threshold

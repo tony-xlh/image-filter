@@ -80,7 +80,7 @@ export class BlackwhiteFilter extends GenericImageFilter {
     return output;
   }
 
-  computeIntegralImage(data:Uint8ClampedArray<ArrayBufferLike>, width:number, height:number) {
+  computeIntegralImage(data:Uint8ClampedArray, width:number, height:number) {
     const integral = new Uint32Array(width * height);
 
     for (let y = 0; y < height; y++) {
