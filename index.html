@@ -29,11 +29,12 @@
     }
     </style>
     <script type="module">
-      import { BlackwhiteFilter, InvertFilter, GrayscaleFilter, SepiaFilter } from 'https://cdn.jsdelivr.net/npm/image-filter-js@0.1.4/dist/image-filter.js';
+      import { BlackwhiteFilter, InvertFilter, GrayscaleFilter, SepiaFilter, GaussianBlurFilter } from 'https://cdn.jsdelivr.net/npm/image-filter-js@1.0.1/dist/image-filter.js';
       window["GrayscaleFilter"] = GrayscaleFilter;
       window["SepiaFilter"] = SepiaFilter;
       window["InvertFilter"] = InvertFilter;
       window["BlackwhiteFilter"] = BlackwhiteFilter;
+      window["GaussianBlurFilter"] = GaussianBlurFilter;
     </script>
   </head>
   <body>
@@ -49,6 +50,8 @@
           <option>Invert</option>
           <option>Black & White (50% Threshold)</option>
           <option>Black & White (OTSU)</option>
+          <option>Black & White (Adaptive)</option>
+          <option>Gaussian Blur</option>
         </select>
       </label>
       <button id="convertButton">Convert</button>
@@ -65,6 +68,7 @@
       let sepiaFilter;
       let blackwhiteFilter;
       let invertFilter;
+      let gaussianBlurFilter;
       let editViewer;
 
       window.onload = function (){
@@ -72,6 +76,7 @@
         sepiaFilter = new SepiaFilter(cvs);
         blackwhiteFilter = new BlackwhiteFilter(cvs);
         invertFilter = new InvertFilter(cvs);
+        gaussianBlurFilter = new GaussianBlurFilter(cvs,3);
       }
 
       document.getElementById("loadFileButton").addEventListener("click",function(){
@@ -92,10 +97,15 @@
           blackwhiteFilter.setOTSUEnabled(false);
           let threshold = blackwhiteFilter.process(img);
           console.log("Threshold: "+threshold);
-        }else{
+        }else if (effectIndex === 4){
           blackwhiteFilter.setOTSUEnabled(true);
           let threshold = blackwhiteFilter.process(img);
           console.log("Threshold: "+threshold);
+        }else if (effectIndex === 5){
+          blackwhiteFilter.setAdaptive(true,31,10);
+          blackwhiteFilter.process(img);
+        }else if (effectIndex === 6){
+          gaussianBlurFilter.process(img);
         }
         document.getElementById("image").src = cvs.toDataURL();
       })
