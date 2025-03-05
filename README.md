@@ -32,24 +32,33 @@ Via CDN:
 Process an image with the desired effect and save the data onto a Canvas.
 
 ```js
-import { ImageFilterHandler, BlackwhiteFilter, InvertFilter, GrayscaleFilter, SepiaFilter } from 'image-filter-js';
+import { ImageFilterHandler, BlackwhiteFilter, InvertFilter, GrayscaleFilter, SepiaFilter, GaussianBlurFilter } from 'image-filter-js';
 let cvs = document.createElement("canvas");
 let grayscaleFilter = new GrayscaleFilter(cvs);
 grayscaleFilter.process(img);
 ```
 
-There are four filters:
+There are five filters:
 
 1. Grayscale
 2. Black & White
 3. Sepia
 4. Invert
+5. Gaussian Blur
 
-The `BlackwhiteFilter`'s constructor takes two extra arguments. You can specify its threshold or enable automatic threshold calculating using OTSU's method.
+The `BlackwhiteFilter`'s constructor takes four extra arguments.
+
+* threshold: the global threshold
+* enableOTSU: whether to use OTSU to decide the threshold
+* enableAdaptiveThresholding: enable adaptive thresholding to determine the threshold for each pixel based on neighbouring pixels
+* blockSize: the block size for adaptive thresholding
+* C: the constant C to adjust the threshold in adaptive threhsolding
 
 ```js
-let blackwhiteFilter = new BlackwhiteFilter(cvs,127,true);
+let blackwhiteFilter = new BlackwhiteFilter(cvs,threshold,enableOTSU,enableAdaptiveThresholding,blockSize,C);
 ```
+
+The `GaussianBlurFilter`'s constructor takes one extra argument: radius.
 
 ## Work with Dynamsoft Document Viewer
 
