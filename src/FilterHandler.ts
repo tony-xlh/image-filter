@@ -2,6 +2,7 @@ import { InvertFilter } from ".";
 import { BlackwhiteFilter } from "./BlackwhiteFilter";
 import { GrayscaleFilter } from "./GrayscaleFilter";
 import { SepiaFilter } from "./SepiaFilter";
+import { GaussianBlurFilter } from "./GaussianBlurFilter";
 
 let DDV;
 //allows setting the DDV namespace. It is needed if Dynamsoft Document Viewer (DDV) is installed with NPM.
@@ -51,7 +52,10 @@ export class ImageFilterHandler extends DDV.ImageFilter  {
     }else{
       let img = await imageFromBlob(image.data);
       if (type === "BW") {
-        let blackwhiteFilter = new BlackwhiteFilter(canvas,127,true);
+        let blackwhiteFilter = new BlackwhiteFilter(canvas,127,true,false,31,10);
+        blackwhiteFilter.process(img);
+      }else if (type === "BW (adaptive)") {
+        let blackwhiteFilter = new BlackwhiteFilter(canvas,127,true,true,31,10);
         blackwhiteFilter.process(img);
       }else if (type === "sepia") {
         let sepiaFilter = new SepiaFilter(canvas);
@@ -62,6 +66,9 @@ export class ImageFilterHandler extends DDV.ImageFilter  {
       }else if (type === "invert") {
         let invertFilter = new InvertFilter(canvas);
         invertFilter.process(img);
+      }else if (type === "blur") {
+        let gaussianBlurFilter = new GaussianBlurFilter(canvas,3);
+        gaussianBlurFilter.process(img);
       }
       let blob = await canvasToBlob();
       return new Promise((r, _j) => {
@@ -87,12 +94,20 @@ export class ImageFilterHandler extends DDV.ImageFilter  {
         label: "B&W"
       },
       {
+        type: "BW (adaptive)",
+        label: "B&W (adaptive)"
+      },
+      {
         type: "invert",
         label: "Invert"
       },
       {
         type: "sepia",
         label: "Retro",
+      },
+      {
+        type: "blur",
+        label: "Blur",
       }
     ]
   };
