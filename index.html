@@ -46,6 +46,7 @@
           <option>Black & White (50% Threshold)</option>
           <option>Black & White (OTSU)</option>
           <option>Black & White (Adaptive)</option>
+          <option>Gaussian Blur</option>
         </select>
       </label>
       <button id="convertButton">Convert</button>
@@ -66,12 +67,14 @@
       let blackwhiteFilter;
       let invertFilter;
       let editViewer;
+      let gaussianBlurFilter;
 
       window.onload = function (){
         grayscaleFilter = new GrayscaleFilter(cvs);
         sepiaFilter = new SepiaFilter(cvs);
         blackwhiteFilter = new BlackwhiteFilter(cvs);
         invertFilter = new InvertFilter(cvs);
+        gaussianBlurFilter = new GaussianBlurFilter(cvs,3);
         initDDV();
       }
 
@@ -127,6 +130,8 @@
         }else if (effectIndex === 5){
           blackwhiteFilter.setAdaptive(true,31,10);
           blackwhiteFilter.process(img);
+        }else if (effectIndex === 6){
+          gaussianBlurFilter.process(img);
         }
         document.getElementById("image").src = cvs.toDataURL();
       })
